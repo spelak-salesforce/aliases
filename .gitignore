@@ -4,5 +4,3 @@
 # But not these files...
 !.gitignore
 !.aliases
-!.bash_profile
-!.zshrc
