@@ -11,6 +11,7 @@ alias dev_org='cci org remove dev && cci flow run dev_org --org dev'
 alias dev_open='cci org browser dev'
 alias dev_org_open='dev_org && dev_open'
 alias push_and_test='sfdx force:source:push -f && cci_test $1';
+alias dev_deploy='cci task run update_package_xml --org dev && cci task run deploy --org dev'
 
 alias sfdx_test='sfdx force:apex:test:run -c -r human -w 10 -y -n $1';
 
