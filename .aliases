@@ -71,3 +71,13 @@ function source_pull_convert {
   fi
   sfdx force:source:convert -r force-app/ -d src/
 }
+
+function yaml {
+  python3 -c "import yaml;print(yaml.safe_load(open('$1'))$2)"
+}
+
+function dev_sfdx {
+  PROJECT_NAME=$(yaml cumulusci.yml  "['project']['name']")
+  PROJECT_NAME+='__dev'
+  sfdx force:config:set defaultusername=$PROJECT_NAME
+}
