@@ -18,7 +18,7 @@ alias sfdx_test='sfdx force:apex:test:run -c -r human -w 10 -y -n $1';
 
 # Aynchronuously test $1; $1 is a comma-delimited list of Apex Class Names
 alias sfdx_tests='sfdx force:apex:test:run -c -r human -w 10 -n $1';
-
+alias sfdx_tests_all='sfdx force:apex:test:run -c -l RunLocalTests -r human'
 
 alias git_delete_merged_branches='git for-each-ref --format "%(refname:short)" --merged HEAD refs/heads/$1 | grep -v master | xargs git branch -d'
 alias git_delete_merged_feature_branches='git_delete_merged_branches feature'
