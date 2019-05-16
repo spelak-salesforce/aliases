@@ -12,7 +12,7 @@ alias dev_open='cci org browser dev'
 alias dev_org_open='dev_org && dev_open'
 alias push_and_test='sfdx force:source:push -f && cci_test $1'
 alias dev_deploy='cci flow run deploy_unmanaged --org dev'
-alias dev_branch='git_master && git checkout $1 && dev_deploy'
+alias dev_branch='git_master && git checkout $1'
 
 # Synchronuously test $1; can only synchronuously test a single Apex Class
 alias sfdx_test='sfdx force:apex:test:run -c -r human -w 10 -y -n $1'
@@ -23,7 +23,7 @@ alias sfdx_tests_all='sfdx force:apex:test:run -c -l RunLocalTests -r human'
 
 alias git_delete_merged_branches='git for-each-ref --format "%(refname:short)" --merged HEAD refs/heads/$1 | grep -v master | xargs git branch -d'
 alias git_delete_merged_feature_branches='git_delete_merged_branches feature'
-alias git_master='git fetch origin && git checkout master && git clean -d -f && git pull && git_delete_merged_feature_branches && git branch'
+alias git_master='git fetch origin && git checkout master && git clean -d -f && git pull && git_delete_merged_feature_branches'
 
 function force_push_and_test {
   if [ -z "$1" ]
