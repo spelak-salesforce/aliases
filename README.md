@@ -11,4 +11,4 @@ Examples
 --- 
 > Call `source $HOME/[path to this repo]/.aliases` in your `~/.bash_profile` if you using the default terminal.
 
-> Call `source $HOME/[path to this repo]/.aliases` in your `~/.zshrc` if you use **zsh**.
+> Call `source $HOME/[path to this repo]/.aliases` in your `~/.zshrc` if you use [zsh](https://ohmyz.sh/).
