@@ -16,7 +16,7 @@ Example
 -  If using [zsh](https://ohmyz.sh/), add the following to your `~/.zshrc`
 ```bash
 # Load Aliases
-export $ALIASES="$HOME/[path to repo]/aliases" 
+export ALIASES="$HOME/[path to repo]/aliases" 
 source $ALIASES/.aliases
     # .alises also loads git-completion via $ALIASES variable
 ```

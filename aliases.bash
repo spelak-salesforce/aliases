@@ -92,5 +92,7 @@ function dev_sfdx {
   sfdx force:config:set defaultusername=$PROJECT_NAME
 }
 
-# Load scripts
-source $ALIASES/git/git-completion.bash
+# auto-completion
+if [ -f /opt/local/etc/profile.d/bash_completion.sh ]; then
+  . /opt/local/etc/profile.d/bash_completion.sh
+fi
