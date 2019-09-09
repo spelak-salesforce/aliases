@@ -21,6 +21,8 @@ alias dev_deploy='cci flow run deploy_unmanaged --org dev'
 
 alias update_cci='brew update && brew upgrade && npm update --global sfdx-cli'
 
+alias cci_rollback='git checkout -- . && rm -rf force-app-bak'
+
 # Synchronuously test $1; can only synchronuously test a single Apex Class
 alias sfdx_test='sfdx force:apex:test:run -c -r human -w 10 -y -n $1'
 
