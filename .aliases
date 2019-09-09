@@ -1,3 +1,4 @@
+
 # git
 alias git_delete_merged_branches='git for-each-ref --format "%(refname:short)" --merged HEAD refs/heads/$1 | grep -v master | xargs git branch -d'
 alias git_delete_merged_feature_branches='git_delete_merged_branches feature'
@@ -90,3 +91,6 @@ function dev_sfdx {
   PROJECT_NAME+='__dev'
   sfdx force:config:set defaultusername=$PROJECT_NAME
 }
+
+# Load scripts
+source $ALIASES/git/git-completion.bash
