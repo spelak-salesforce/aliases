@@ -14,9 +14,11 @@ alias install_local_cci='pip install -r requirements_dev.txt'
 
 alias source_convert='sfdx force:source:convert -r force-app/ -d src/'
 
-alias dev_org='cci org remove dev && cci flow run dev_org --org dev && cci org default dev'
+alias dev_org='cci org remove $1 && cci flow run dev_org --org $1 && cci org default $1'
+alias dev_org_namespaced='cci org remove $1 && cci flow run dev_org_namespaced --org $1 && cci org default $1'
+
 alias dev_open='cci org browser dev'
-alias dev_org_open='dev_org && dev_open'
+
 alias push_and_test='sfdx force:source:push -f && cci_test $1'
 alias dev_deploy='cci flow run deploy_unmanaged --org dev'
 
