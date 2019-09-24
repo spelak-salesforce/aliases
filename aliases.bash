@@ -1,4 +1,83 @@
 
+# echo with colors
+BLACK_COLOR='\033[0;30m'
+RED_COLOR='\033[0;31m'
+GREEN_COLOR='\033[0;32m'
+ORGANGE_COLOR='\033[0;33m'
+BLUE_COLOR='\033[0;34m'
+PURPLE_COLOR='\033[0;35m'
+CYAN_COLOR='\033[0;36m'
+LIGHT_GREY_COLOR='\033[0;37m'
+DARK_GREY_COLOR='\033[1;30m'
+LIGHT_RED_COLOR='\033[1;31m'
+LIGHT_GREEN_COLOR='\033[1;32m'
+YELLOW_COLOR='\033[1;33m'
+LIGHT_BLUE_COLOR='\033[1;34m'
+LIGHT_PURPPLE_COLOR='\033[1;35m'
+LIGHT_CYAN_COLOR='\033[1;36m'
+WHITE_COLOR='\033[1;37m'
+
+END_COLOR='\033[0m' # No Color
+
+# Black        0;30     Dark Gray     1;30
+# Red          0;31     Light Red     1;31
+# Green        0;32     Light Green   1;32
+# Brown/Orange 0;33     Yellow        1;33
+# Blue         0;34     Light Blue    1;34
+# Purple       0;35     Light Purple  1;35
+# Cyan         0;36     Light Cyan    1;36
+# Light Gray   0;37     White         1;37
+# END_COLOR    \033[0m
+
+function echo_black {
+  echo "${BLACK_COLOR}$1${END_COLOR}"
+}
+function echo_red {
+  echo "${RED_COLOR}$1${END_COLOR}"
+}
+function echo_green {
+  echo "${GREEN_COLOR}$1${END_COLOR}"
+}
+function echo_organge {
+  echo "${ORGANGE_COLOR}$1${END_COLOR}"
+}
+function echo_blue {
+  echo "${BLUE_COLOR}$1${END_COLOR}"
+}
+function echo_purple {
+  echo "${PURPLE_COLOR}$1${END_COLOR}"
+}
+function echo_cyan {
+  echo "${CYAN_COLOR}$1${END_COLOR}"
+}
+function echo_light_grey {
+  echo "${LIGHT_GREY_COLOR}$1${END_COLOR}"
+}
+function echo_dark_grey {
+  echo "${DARK_GREY_COLOR}$1${END_COLOR}"
+}
+function echo_light_red {
+  echo "${LIGHT_RED_COLOR}$1${END_COLOR}"
+}
+function echo_light_green {
+  echo "${LIGHT_GREEN_COLOR}$1${END_COLOR}"
+}
+function echo_yellow {
+  echo "${YELLOW_COLOR}$1${END_COLOR}"
+}
+function echo_light_blue {
+  echo "${LIGHT_BLUE_COLOR}$1${END_COLOR}"
+}
+function echo_light_purpple {
+  echo "${LIGHT_PURPPLE_COLOR}$1${END_COLOR}"
+}
+function echo_light_cyan {
+  echo "${LIGHT_CYAN_COLOR}$1${END_COLOR}"
+}
+function echo_white {
+  echo "${WHITE_COLOR}$1${END_COLOR}"
+}
+
 # git
 alias git_delete_merged_branches='git for-each-ref --format "%(refname:short)" --merged HEAD refs/heads/$1 | grep -v master | xargs git branch -d'
 alias git_delete_merged_feature_branches='git_delete_merged_branches feature'
@@ -14,8 +93,57 @@ alias install_local_cci='pip install -r requirements_dev.txt'
 
 alias source_convert='sfdx force:source:convert -r force-app/ -d src/'
 
-alias dev_org='cci org remove $1 && cci flow run dev_org --org $1 && cci org default $1'
-alias dev_org_namespaced='cci org remove $1 && cci flow run dev_org_namespaced --org $1 && cci org default $1'
+flow_org() {
+  echo ""
+  echo_blue "flow_org ORG_NAME FLOW_NAME"
+  echo_blue "--------------------------------------"
+
+  if [[ $# -eq 0 ]]
+    then
+      echo_red "No arugments found.  Expecting 2 arguments: cci org name, cci flow name"
+      echo ""
+      return 1
+  fi
+  if [[ -z "$1" ]]
+    then
+      echo_red "First argument cannot be blank: cci org name"
+      echo ""
+      return 1
+  fi
+
+  if [[ -z "$2" ]]
+    then
+      echo_red "First argument cannot be blank: cci flow name"
+      echo ""
+      return 1
+  fi
+
+  echo ""
+  
+  echo_green "Removing cci org: $1"
+  echo_green "--------------------------------------"
+  cci org remove "$1"
+  echo ""
+
+  echo_green "Setting $1 as cci's default org"
+  echo_green "--------------------------------------"
+  cci org default "$1"
+  echo ""
+
+  echo_green "Running $2 flow on $1 org"
+  echo_green "--------------------------------------"
+  cci flow run "$2" --org "$1"
+
+  echo ""
+}
+
+dev_org() {
+  flow_org $1 "dev_org"
+}
+
+dev_org_namespaced() {
+  flow_org $1 "dev_org_namespaced"
+}
 
 alias dev_open='cci org browser dev'
 
