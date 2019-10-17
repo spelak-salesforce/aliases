@@ -142,7 +142,7 @@ dev_org() {
 }
 
 dev_org_namespaced() {
-  flow_org $1 "dev_org_namespaced"
+  flow_org "$1_namespaced" "dev_org_namespaced"
 }
 
 alias dev_open='cci org browser dev'
