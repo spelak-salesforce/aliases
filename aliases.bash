@@ -145,6 +145,22 @@ dev_org_namespaced() {
   flow_org "$1_namespaced" "dev_org_namespaced"
 }
 
+pmdm_org() {
+  flow_org $1 "pmdm_org"
+}
+
+pmdm_org_namespaced() {
+  flow_org "$1_namespaced" "pmdm_org_namespaced"
+}
+
+caseman_org() {
+  flow_org $1 "caseman_org"
+}
+
+caseman_org_namespaced() {
+  flow_org "$1_namespaced" "caseman_org_namespaced"
+}
+
 alias dev_open='cci org browser dev'
 
 alias push_and_test='sfdx force:source:push -f && cci_test $1'
