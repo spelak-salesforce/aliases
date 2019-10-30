@@ -94,10 +94,6 @@ alias install_local_cci='pip install -r requirements_dev.txt'
 alias source_convert='sfdx force:source:convert -r force-app/ -d src/'
 
 flow_org() {
-  echo ""
-  echo_blue "flow_org ORG_NAME FLOW_NAME"
-  echo_blue "--------------------------------------"
-
   if [[ $# -eq 0 ]]
     then
       echo_red "No arugments found.  Expecting 2 arguments: cci org name, cci flow name"
