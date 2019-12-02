@@ -81,7 +81,7 @@ function echo_white {
 # git
 alias git_delete_merged_branches='git for-each-ref --format "%(refname:short)" --merged HEAD refs/heads/$1 | grep -v master | xargs git branch -d'
 alias git_delete_merged_feature_branches='git_delete_merged_branches feature'
-alias git_master='git fetch origin && git checkout master && git clean -d -f && git pull && git_delete_merged_feature_branches'
+alias git_master='git fetch origin && git checkout master && git remote prune origin && git clean -d -f && git pull'
 alias git_branch='git_master && git checkout $1'
 
 # cci shortcuts
@@ -92,6 +92,10 @@ alias force_connect='force usedxauth "${PWD##*/}"__dev && sfdx force:config:set 
 alias install_local_cci='pip install -r requirements_dev.txt'
 
 alias source_convert='sfdx force:source:convert -r force-app/ -d src/'
+
+# use python 3 instead of python 2
+alias python=$(which python3)
+alias pip=$(which pip3)
 
 flow_org() {
   if [[ $# -eq 0 ]]
