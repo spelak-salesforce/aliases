@@ -86,6 +86,9 @@ alias git_branch='git_master && git checkout $1'
 
 # cci shortcuts
 alias cci_test='cci task run run_tests --org dev -o test_name_match '
+alias ccit='cci task run '
+alias ccif='cci flow run '
+alias ccib='cci org browser '
 
 alias force_connect='force usedxauth "${PWD##*/}"__dev && sfdx force:config:set defaultusername="${PWD##*/}"__dev'
 
