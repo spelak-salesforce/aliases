@@ -90,6 +90,12 @@ alias ccit='cci task run '
 alias ccif='cci flow run '
 alias ccib='cci org browser '
 
+# sfdx shortcuts
+alias sfdxp='sfdx force:source:push '
+alias sfdxl='sfdx force:source:pull '
+alias sfdxd='sfdx force:source:deploy '
+
+
 alias force_connect='force usedxauth "${PWD##*/}"__dev && sfdx force:config:set defaultusername="${PWD##*/}"__dev'
 
 alias install_local_cci='pip install -r requirements_dev.txt'
