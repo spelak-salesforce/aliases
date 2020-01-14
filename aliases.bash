@@ -94,7 +94,7 @@ alias ccib='cci org browser '
 alias sfdxp='sfdx force:source:push '
 alias sfdxl='sfdx force:source:pull '
 alias sfdxd='sfdx force:source:deploy '
-
+alias sfdxo='sfdx force:org:open '
 
 alias force_connect='force usedxauth "${PWD##*/}"__dev && sfdx force:config:set defaultusername="${PWD##*/}"__dev'
 
