@@ -82,6 +82,7 @@ function echo_white {
 alias git_delete_merged_branches='git for-each-ref --format "%(refname:short)" --merged HEAD refs/heads/$1 | grep -v master | xargs git branch -d'
 alias git_delete_merged_feature_branches='git_delete_merged_branches feature'
 alias git_master='git fetch origin && git checkout master && git remote prune origin && git clean -d -f && git pull'
+alias gitm='git_master'
 alias git_branch='git_master && git checkout $1'
 
 # cci shortcuts
