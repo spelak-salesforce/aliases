@@ -176,7 +176,7 @@ alias dev_open='cci org browser dev'
 alias push_and_test='sfdx force:source:push -f && cci_test $1'
 alias dev_deploy='cci flow run deploy_unmanaged --org dev'
 
-alias update_cci='brew update && brew upgrade && npm update --global sfdx-cli'
+alias update_cci='brew update && brew upgrade && npm update --global sfdx-cli && sfdx update'
 
 alias cci_rollback='git checkout -- . && rm -rf force-app-bak'
 
