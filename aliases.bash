@@ -182,6 +182,7 @@ alias cci_rollback='git checkout -- . && rm -rf force-app-bak'
 
 # Synchronuously test $1; can only synchronuously test a single Apex Class
 alias sfdx_test='sfdx force:apex:test:run -c -r human -w 10 -y -n $1'
+alias sfdx_test_method='sfdx force:apex:test:run --codecoverage --resultformat=human --wait=10 --synchronous -t $1'
 
 # Aynchronuously test $1; $1 is a comma-delimited list of Apex Class Names
 alias sfdx_tests='sfdx force:apex:test:run -c -r human -w 10 -n $1'
