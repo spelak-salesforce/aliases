@@ -175,6 +175,7 @@ alias dev_open='cci org browser dev'
 
 alias push_and_test='sfdx force:source:push -f && cci_test $1'
 alias dev_deploy='cci flow run deploy_unmanaged --org dev'
+alias remove_git_hooks='find .git/hooks -type f ! -name "*.sample" -delete'
 
 alias update_cci='brew update && brew upgrade && npm update --global sfdx-cli && sfdx update'
 
