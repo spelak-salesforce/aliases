@@ -256,3 +256,4 @@ if [ -f /opt/local/etc/profile.d/bash_completion.sh ]; then
 fi
 
 export GITHUB="$HOME/Documents/github.com";
+export SOMA="$HOME/Documents/git.soma.salesforce.com";
