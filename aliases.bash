@@ -90,6 +90,7 @@ alias cci_test='cci task run run_tests --org dev -o test_name_match '
 alias ccit='cci task run '
 alias ccif='cci flow run '
 alias ccib='cci org browser '
+alias ccii='cci org info '
 
 # sfdx shortcuts
 alias sfdxp='sfdx force:source:push '
@@ -257,3 +258,4 @@ fi
 
 export GITHUB="$HOME/Documents/github.com";
 export SOMA="$HOME/Documents/git.soma.salesforce.com";
+export GPG_TTY=$(tty)
