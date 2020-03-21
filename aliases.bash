@@ -98,6 +98,11 @@ alias sfdxl='sfdx force:source:pull '
 alias sfdxd='sfdx force:source:deploy '
 alias sfdxo='sfdx force:org:open '
 
+alias sfp='sfdx force:source:push '
+alias sfl='sfdx force:source:pull '
+alias sfd='sfdx force:source:deploy '
+alias sfo='sfdx force:org:open '
+
 alias force_connect='force usedxauth "${PWD##*/}"__dev && sfdx force:config:set defaultusername="${PWD##*/}"__dev'
 
 alias install_local_cci='pip install -r requirements_dev.txt'
