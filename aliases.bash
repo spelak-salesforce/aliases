@@ -263,6 +263,11 @@ if [ -f /opt/local/etc/profile.d/bash_completion.sh ]; then
   . /opt/local/etc/profile.d/bash_completion.sh
 fi
 
-export GITHUB="$HOME/Documents/github.com";
-export SOMA="$HOME/Documents/git.soma.salesforce.com";
+export GITHUB="$HOME/Documents/github.com"
+export CCI="$GITHUB/SFDO-Tooling/CumulusCI"
+export ALIASES="$GITHUB/spelak-salesforce/aliases"
+export SALESFORCE_FOUNDATION="$GITHUB/SalesforceFoundation"
+
+export SOMA="$HOME/Documents/git.soma.salesforce.com"
+
 export GPG_TTY=$(tty)
