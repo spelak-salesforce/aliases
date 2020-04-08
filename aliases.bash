@@ -267,6 +267,7 @@ export GITHUB="$HOME/Documents/github.com"
 export CCI="$GITHUB/SFDO-Tooling/CumulusCI"
 export ALIASES="$GITHUB/spelak-salesforce/aliases"
 export SALESFORCE_FOUNDATION="$GITHUB/SalesforceFoundation"
+export SFDO="$GITHUB/SalesforceFoundation"
 
 export SOMA="$HOME/Documents/git.soma.salesforce.com"
 
