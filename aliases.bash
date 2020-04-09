@@ -269,6 +269,11 @@ export ALIASES="$GITHUB/spelak-salesforce/aliases"
 export SALESFORCE_FOUNDATION="$GITHUB/SalesforceFoundation"
 export SFDO="$GITHUB/SalesforceFoundation"
 
+# In Summer '20, the apex test reporter will return more relevant and accurate code coverage results for test runs. 
+# To preview this change, set the environment variable SFDX_IMPROVED_CODE_COVERAGE='true'.
+# Learn more at # https://releasenotes.docs.salesforce.com/en-us/spring20/release-notes/rn_sf_cli_code_coverage_apextests.htm
+export SFDX_IMPROVED_CODE_COVERAGE='true'
+
 export SOMA="$HOME/Documents/git.soma.salesforce.com"
 
 export GPG_TTY=$(tty)
