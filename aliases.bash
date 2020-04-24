@@ -103,7 +103,7 @@ alias sfl='sfdx force:source:pull '
 alias sfd='sfdx force:source:deploy '
 alias sfo='sfdx force:org:open '
 
-alias sfdo_devhub='sfdx force:config:set defaultdevhubusername=sfdo-dx-hub-prod'
+alias sfdo_devhub='sfdx force:config:set defaultdevhubusername=ngo'
 
 alias force_connect='force usedxauth "${PWD##*/}"__dev && sfdx force:config:set defaultusername="${PWD##*/}"__dev'
 
