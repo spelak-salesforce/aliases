@@ -277,3 +277,12 @@ export SFDX_IMPROVED_CODE_COVERAGE='true'
 export SOMA="$HOME/Documents/git.soma.salesforce.com"
 
 export GPG_TTY=$(tty)
+
+# Checkout CCI master
+echo "Updating cci..."
+echo "---------------"
+current_directory=$PWD
+cd $CCI
+gitm
+echo "---------------"
+cd $current_directory
