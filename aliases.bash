@@ -83,6 +83,7 @@ alias git_delete_merged_branches='git for-each-ref --format "%(refname:short)" -
 alias git_delete_merged_feature_branches='git_delete_merged_branches feature'
 alias git_master='git fetch origin && git checkout master && git remote prune origin && git clean -d -f && git pull'
 alias gitm='git_master'
+alias gitmd='git add . && git stash && git stash drop && gitm'
 alias git_branch='git_master && git checkout $1'
 
 # cci shortcuts
@@ -277,6 +278,9 @@ export SFDX_IMPROVED_CODE_COVERAGE='true'
 export SOMA="$HOME/Documents/git.soma.salesforce.com"
 
 export GPG_TTY=$(tty)
+
+# load platform localization tool in PATH
+PATH=~PATH:$SOMA/spelak/l10n
 
 # Checkout CCI master
 echo "Updating cci..."
