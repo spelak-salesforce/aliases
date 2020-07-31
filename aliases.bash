@@ -204,7 +204,10 @@ alias sfdx_tests='sfdx force:apex:test:run -c -r human -w 10 -n $1'
 alias sfdx_tests_all='sfdx force:apex:test:run -c -l RunLocalTests -r human'
 
 # Python
-alias blake='black $1 && flake8 $1'
+function blake {  
+  black $1
+  flake8 $1
+}
 
 function force_push_and_test {
   if [ -z "$1" ]
