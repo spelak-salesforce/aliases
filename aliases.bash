@@ -95,6 +95,7 @@ alias cci_test='cci task run run_tests --org dev -o test_name_match '
 alias ccit='cci task run '
 alias ccif='cci flow run '
 alias ccib='cci org browser '
+alias ccid='cci org default '
 alias ccii='cci org info '
 
 # sfdx shortcuts
@@ -201,6 +202,9 @@ alias sfdx_test_method='sfdx force:apex:test:run --codecoverage --resultformat=h
 # Aynchronuously test $1; $1 is a comma-delimited list of Apex Class Names
 alias sfdx_tests='sfdx force:apex:test:run -c -r human -w 10 -n $1'
 alias sfdx_tests_all='sfdx force:apex:test:run -c -l RunLocalTests -r human'
+
+# Python
+alias blake='black $1 && flake8 $1'
 
 function force_push_and_test {
   if [ -z "$1" ]
