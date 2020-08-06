@@ -86,9 +86,16 @@ function get_default_branch {
 alias git_delete_merged_branches='git for-each-ref --format "%(refname:short)" --merged HEAD refs/heads/$1 | grep -v master | xargs git branch -d'
 alias git_delete_merged_feature_branches='git_delete_merged_branches feature'
 alias git_master='git fetch origin && git checkout master && git remote prune origin && git clean -d -f && git pull'
+alias git_main='git fetch origin && git checkout main && git remote prune origin && git clean -d -f && git pull'
+alias git_drop='git add . && git stash && git stash drop'
+
 alias gitm='git_master'
+alias gitd='git_drop'
 alias gitmd='git add . && git stash && git stash drop && gitm'
+
 alias git_branch='git_master && git checkout $1'
+
+
 
 # cci shortcuts
 alias cci_test='cci task run run_tests --org dev -o test_name_match '
@@ -205,8 +212,23 @@ alias sfdx_tests_all='sfdx force:apex:test:run -c -l RunLocalTests -r human'
 
 # Python
 function blake {  
+  echo "black"
+  echo "----------------------"
   black $1
+  echo ""
+
+  echo "flake8"
+  echo "----------------------"
   flake8 $1
+  echo ""
+}
+
+function bytest {
+  blake $1
+  echo "pytest"
+  echo "----------------------"
+  pytest $1
+  echo ""
 }
 
 function force_push_and_test {
