@@ -308,6 +308,7 @@ export ALIASES="$GITHUB/spelak-salesforce/aliases"
 export SALESFORCE_FOUNDATION="$GITHUB/SalesforceFoundation"
 export SFDO="$GITHUB/SalesforceFoundation"
 export SOMA="$HOME/Documents/git.soma.salesforce.com"
+export LOC="$SOMA/platform-localization/loc"
 export SCOTTPELAK="$GITHUB/scottpelak"
 
 # In Summer '20, the apex test reporter will return more relevant and accurate code coverage results for test runs. 
