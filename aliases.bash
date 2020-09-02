@@ -226,8 +226,61 @@ scratch_org() {
   echo ""
 }
 
+flow_scratch_org() {
+  if [[ $# -eq 0 ]]
+    then
+      echo_red "No arugments found.  Expecting 3 arguments: flow name, cci org template name, cci scratch org name, [days]"
+      echo ""
+      return 1
+  fi
+
+  if [[ -z "$1" ]]
+    then
+      echo_red "First argument cannot be blank: flow name"
+      echo ""
+      return 1
+  fi
+  
+  if [[ -z "$2" ]]
+    then
+      echo_red "First argument cannot be blank: cci org template name"
+      echo ""
+      return 1
+  fi
+
+  if [[ -z "$3" ]]
+    then
+      echo_red "First argument cannot be blank: cci scratch org name"
+      echo ""
+      return 1
+  fi
+
+  flow=$1
+  org_template=$2
+  scratch_org=$3
+  days=$4
+
+  scratch_org $org_template $scratch_org $days
+
+  echo_blue "Running $flow flow on $scratch_org org"
+  echo_blue "--------------------------------------"
+  echo "cci flow run $flow --org \"$scratch_org\""
+  echo ""
+  cci flow run "$flow" --org "$scratch_org"
+  echo ""
+}
+
 dev_org() {
   flow_org $1 "dev_org"
+}
+
+dev_scratch_org() {
+  flow="dev_org"
+  org_template="dev"
+  scratch_org=$1
+  days=$2
+
+  flow_scratch_org $flow $org_template $scratch_org $days
 }
 
 dev_org_namespaced() {
@@ -236,6 +289,15 @@ dev_org_namespaced() {
 
 beta_org() {
   flow_org $1 "install_beta" "not default"
+}
+
+beta_scratch_org() {
+  flow="install_beta"
+  org_template="beta"
+  scratch_org=$1
+  days=$2
+
+  flow_scratch_org $flow $org_template $scratch_org $days
 }
 
 regression_org() {
