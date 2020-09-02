@@ -136,10 +136,11 @@ alias pip=$(which pip3)
 flow_org() {
   if [[ $# -eq 0 ]]
     then
-      echo_red "No arugments found.  Expecting 2 arguments: cci org name, cci flow name"
+      echo_red "No arugments found.  Expecting 2 arguments: cci org name, cci flow name[, is_default]"
       echo ""
       return 1
   fi
+
   if [[ -z "$1" ]]
     then
       echo_red "First argument cannot be blank: cci org name"
@@ -158,18 +159,27 @@ flow_org() {
   
   echo_green "Removing cci org: $1"
   echo_green "--------------------------------------"
+  echo "cci org remove \"$1\""
+  echo ""
   cci org remove "$1"
   echo ""
 
-  echo_green "Setting $1 as cci's default org"
-  echo_green "--------------------------------------"
-  cci org default "$1"
-  echo ""
+  # Skip setting the org as the default org if the third argument is anything.
+  if [[ -z "$3" ]]
+    then
+    echo_green "Setting $1 as cci's default org"
+    echo_green "--------------------------------------"
+    echo "cci org default \"$1\""
+    echo ""
+    cci org default "$1"
+    echo ""
+  fi
 
   echo_green "Running $2 flow on $1 org"
   echo_green "--------------------------------------"
+  echo "cci flow run \"$2\" --org \"$1\""
+  echo ""
   cci flow run "$2" --org "$1"
-
   echo ""
 }
 
@@ -179,6 +189,14 @@ dev_org() {
 
 dev_org_namespaced() {
   flow_org "$1_namespaced" "dev_org_namespaced"
+}
+
+beta_org() {
+  flow_org $1 "install_beta" "not default"
+}
+
+regression_org() {
+  flow_org $1 "regression_org" "not default"
 }
 
 pmdm_org() {
