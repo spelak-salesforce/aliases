@@ -109,6 +109,7 @@ alias ccifi='cci flow info '
 alias ccib='cci org browser '
 alias ccid='cci org default '
 alias ccii='cci org info '
+alias ccis='cci org scratch '
 
 # sfdx shortcuts
 alias sfdxp='sfdx force:source:push '
