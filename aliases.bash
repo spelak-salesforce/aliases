@@ -136,7 +136,7 @@ alias pip=$(which pip3)
 flow_org() {
   if [[ $# -eq 0 ]]
     then
-      echo_red "No arugments found.  Expecting 2 arguments: cci org name, cci flow name[, is_default]"
+      echo_red "No arugments found.  Expecting 2 arguments: cci org name, cci flow name[, is_not_default]"
       echo ""
       return 1
   fi
@@ -155,31 +155,35 @@ flow_org() {
       return 1
   fi
 
+  org=$1
+  flow=$2
+  is_not_default=$3
+
   echo ""
   
-  echo_green "Removing cci org: $1"
+  echo_green "Removing cci org: $org"
   echo_green "--------------------------------------"
-  echo "cci org remove \"$1\""
+  echo "cci org remove \"$org\""
   echo ""
-  cci org remove "$1"
+  cci org remove "$org"
   echo ""
 
   # Skip setting the org as the default org if the third argument is anything.
-  if [[ -z "$3" ]]
+  if [[ -z "$is_not_default" ]]
     then
-    echo_green "Setting $1 as cci's default org"
+    echo_green "Setting $org as cci's default org"
     echo_green "--------------------------------------"
-    echo "cci org default \"$1\""
+    echo "cci org default \"$org\""
     echo ""
-    cci org default "$1"
+    cci org default "$org"
     echo ""
   fi
 
-  echo_green "Running $2 flow on $1 org"
+  echo_green "Running $flow flow on $org org"
   echo_green "--------------------------------------"
-  echo "cci flow run \"$2\" --org \"$1\""
+  echo "cci flow run \"$flow\" --org \"$org\""
   echo ""
-  cci flow run "$2" --org "$1"
+  cci flow run "$flow" --org "$org"
   echo ""
 }
 
@@ -271,7 +275,10 @@ flow_scratch_org() {
 }
 
 dev_org() {
-  flow_org $1 "dev_org"
+  org=$1
+  flow="dev_org"
+  is_not_default=$2
+  flow_org $org $flow $is_not_default
 }
 
 dev_scratch_org() {
@@ -284,11 +291,17 @@ dev_scratch_org() {
 }
 
 dev_org_namespaced() {
-  flow_org "$1_namespaced" "dev_org_namespaced"
+  org="$1_namespaced"
+  flow="dev_org_namespaced"
+  is_not_default=$2
+  flow_org $org $flow $is_not_default
 }
 
 beta_org() {
-  flow_org $1 "install_beta" "not default"
+  org=$1
+  flow="install_beta"
+  is_not_default="not default"
+  flow_org $org $flow $is_not_default
 }
 
 beta_scratch_org() {
@@ -301,23 +314,38 @@ beta_scratch_org() {
 }
 
 regression_org() {
-  flow_org $1 "regression_org" "not default"
+  org=$1
+  flow="regression_org"
+  is_not_default="not default"
+  flow_org $org $flow $is_not_default
 }
 
 pmdm_org() {
-  flow_org $1 "pmdm_org"
+  org=$1
+  flow="pmdm_org"
+  is_not_default=$2
+  flow_org $org $flow $is_not_default
 }
 
 pmdm_org_namespaced() {
-  flow_org "$1_namespaced" "pmdm_org_namespaced"
+  org="$1_namespaced"
+  flow="pmdm_org_namespaced"
+  is_not_default=$2
+  flow_org $org $flow $is_not_default
 }
 
 caseman_org() {
-  flow_org $1 "caseman_org"
+  org=$1
+  flow="caseman_org"
+  is_not_default=$2
+  flow_org $org $flow $is_not_default
 }
 
 caseman_org_namespaced() {
-  flow_org "$1_namespaced" "caseman_org_namespaced"
+  org="$1_namespaced"
+  flow="caseman_org_namespaced"
+  is_not_default=$2
+  flow_org $org $flow $is_not_default
 }
 
 alias dev_open='cci org browser dev'
