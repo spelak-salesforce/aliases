@@ -212,10 +212,10 @@ scratch_org() {
   cci org remove "$2"
   echo ""
 
-  days="1"
+  days="$3"
   if [[ -z "$3" ]]
     then
-      days=$3
+      days=1
   fi
 
   echo_green "Creating cci scratch org $2 from $1 for $days days"
