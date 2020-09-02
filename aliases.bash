@@ -109,7 +109,6 @@ alias ccifi='cci flow info '
 alias ccib='cci org browser '
 alias ccid='cci org default '
 alias ccii='cci org info '
-alias ccis='cci org scratch '
 
 # sfdx shortcuts
 alias sfdxp='sfdx force:source:push '
@@ -181,6 +180,49 @@ flow_org() {
   echo "cci flow run \"$2\" --org \"$1\""
   echo ""
   cci flow run "$2" --org "$1"
+  echo ""
+}
+
+scratch_org() {
+  if [[ $# -eq 0 ]]
+    then
+      echo_red "No arugments found.  Expecting 2 arguments: cci org template name, cci scratch org name, [days]"
+      echo ""
+      return 1
+  fi
+
+  if [[ -z "$1" ]]
+    then
+      echo_red "First argument cannot be blank: cci org template name"
+      echo ""
+      return 1
+  fi
+
+  if [[ -z "$2" ]]
+    then
+      echo_red "First argument cannot be blank: cci scratch org name"
+      echo ""
+      return 1
+  fi
+
+  echo_green "Removing cci scratch org $2"
+  echo_green "--------------------------------------"
+  echo "cci org remove \"$2\""
+  echo ""
+  cci org remove "$2"
+  echo ""
+
+  days="1"
+  if [[ -z "$3" ]]
+    then
+      days=$3
+  fi
+
+  echo_green "Creating cci scratch org $2 from $1 for $days days"
+  echo_green "--------------------------------------"
+  echo "cci org scratch \"$1\" \"$2\" --days \"$days\""
+  echo ""
+  cci org scratch $1 $2 --days $days
   echo ""
 }
 
