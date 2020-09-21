@@ -94,7 +94,7 @@ alias git_maind='git add . && git stash && git stash drop && git_main'
 
 alias git_drop='git add . && git stash && git stash drop'
 
-alias gitm='git_master'
+alias gitm='git_main'
 alias gitd='git_drop'
 alias gitmd='git add . && git stash && git stash drop && gitm'
 
