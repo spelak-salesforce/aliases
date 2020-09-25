@@ -121,6 +121,28 @@ alias sfl='sfdx force:source:pull '
 alias sfd='sfdx force:source:deploy '
 alias sfo='sfdx force:org:open '
 
+# Synchronuously test $1; can only synchronuously test a single Apex Class
+alias sfdx_test='sfdx force:apex:test:run --codecoverage --resultformat=human --wait=10 --synchronous -c $1'
+alias sfdx_test_method='sfdx force:apex:test:run --codecoverage --resultformat=human --wait=10 --synchronous -t $1'
+
+# Aynchronuously test $1; $1 is a comma-delimited list of Apex Class Names
+alias sfdx_tests='sfdx force:apex:test:run -c -r human -w 10 -n $1'
+alias sfdx_tests_all='sfdx force:apex:test:run -c -l RunLocalTests -r human'
+
+function sfpt() {
+  # sfp && sfdx_test combined
+  apex_test=$1
+  is_force="-f"
+
+  if [[ -z "$2" ]]
+    then
+      is_force=""
+  fi
+
+  echo "sfdx force:source:push $is_force && sfdx force:apex:test:run --codecoverage --resultformat=human --wait=10 --synchronous --classnames=$apex_test"
+  sfdx force:source:push $is_force && sfdx force:apex:test:run --codecoverage --resultformat=human --wait=10 --synchronous --classnames=$apex_test
+}
+
 alias sfdo_devhub='sfdx force:config:set defaultdevhubusername=ngo'
 
 alias force_connect='force usedxauth "${PWD##*/}"__dev && sfdx force:config:set defaultusername="${PWD##*/}"__dev'
@@ -357,14 +379,6 @@ alias remove_git_hooks='find .git/hooks -type f ! -name "*.sample" -delete'
 alias update_cci='brew update && brew upgrade && npm update --global sfdx-cli && sfdx update'
 
 alias cci_rollback='git checkout -- . && rm -rf force-app-bak'
-
-# Synchronuously test $1; can only synchronuously test a single Apex Class
-alias sfdx_test='sfdx force:apex:test:run -c -r human -w 10 -y -n $1'
-alias sfdx_test_method='sfdx force:apex:test:run --codecoverage --resultformat=human --wait=10 --synchronous -t $1'
-
-# Aynchronuously test $1; $1 is a comma-delimited list of Apex Class Names
-alias sfdx_tests='sfdx force:apex:test:run -c -r human -w 10 -n $1'
-alias sfdx_tests_all='sfdx force:apex:test:run -c -l RunLocalTests -r human'
 
 # Python
 function blake {  
