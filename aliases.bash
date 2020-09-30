@@ -120,7 +120,7 @@ alias sfp='sfdx force:source:push '
 alias sfl='sfdx force:source:pull '
 alias sfd='sfdx force:source:deploy '
 alias sfo='sfdx force:org:open '
-alias sfa = 'sfdx force:apex:execute -f $1'
+alias sfa='sfdx force:apex:execute -f $1'
 
 # Synchronuously test $1; can only synchronuously test a single Apex Class
 alias sfdx_test='sfdx force:apex:test:run --codecoverage --resultformat=human --wait=10 --synchronous -c $1'
