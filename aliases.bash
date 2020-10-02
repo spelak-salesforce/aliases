@@ -123,7 +123,7 @@ alias sfo='sfdx force:org:open '
 alias sfa='sfdx force:apex:execute -f $1'
 
 # Synchronuously test $1; can only synchronuously test a single Apex Class
-alias sfdx_test='sfdx force:apex:test:run --codecoverage --resultformat=human --wait=10 --synchronous -c $1'
+alias sfdx_test='sfdx force:apex:test:run --codecoverage --resultformat=human --wait=10 --synchronous -n $1'
 alias sfdx_test_method='sfdx force:apex:test:run --codecoverage --resultformat=human --wait=10 --synchronous -t $1'
 
 # Aynchronuously test $1; $1 is a comma-delimited list of Apex Class Names
