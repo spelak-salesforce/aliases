@@ -119,6 +119,7 @@ alias sfdxo='sfdx force:org:open '
 alias sfp='sfdx force:source:push '
 alias sfl='sfdx force:source:pull '
 alias sfd='sfdx force:source:deploy '
+alias sfr='sfdx force:source:retrieve '
 alias sfo='sfdx force:org:open '
 alias sfa='sfdx force:apex:execute -f $1'
 
