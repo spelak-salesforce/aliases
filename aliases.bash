@@ -212,46 +212,65 @@ flow_org() {
 }
 
 scratch_org() {
+
+  org_template=$1
+  org=$2
+  days=$3
+  is_not_default=$4
+
   if [[ $# -eq 0 ]]
     then
-      echo_red "No arugments found.  Expecting 2 arguments: cci org template name, cci scratch org name, [days]"
+      echo_red "No arugments found.  Expecting 2 arguments: cci org template name, cci scratch org name, [days, is_default]"
       echo ""
       return 1
   fi
 
-  if [[ -z "$1" ]]
+  if [[ -z "$org_template" ]]
     then
       echo_red "First argument cannot be blank: cci org template name"
       echo ""
       return 1
   fi
 
-  if [[ -z "$2" ]]
+  if [[ -z "$org" ]]
     then
       echo_red "First argument cannot be blank: cci scratch org name"
       echo ""
       return 1
   fi
 
-  echo_green "Removing cci scratch org $2"
+  
+
+  echo_green "Removing cci scratch org $org"
   echo_green "--------------------------------------"
-  echo "cci org remove \"$2\""
+  echo "cci org remove \"$org\""
   echo ""
-  cci org remove "$2"
+  cci org remove $org
   echo ""
 
-  days="$3"
-  if [[ -z "$3" ]]
+  if [[ -z "$days" ]]
     then
       days=1
   fi
 
-  echo_green "Creating cci scratch org $2 from $1 for $days days"
+  echo_green "Creating cci scratch org $org from $org_template for $days days"
   echo_green "--------------------------------------"
-  echo "cci org scratch \"$1\" \"$2\" --days \"$days\""
+  echo "cci org scratch \"$org_template\" \"$org\" --days \"$days\""
   echo ""
-  cci org scratch $1 $2 --days $days
-  echo ""
+  cci org scratch $org_template $org --days $days
+
+  # Skip setting the org as the default org if the third argument is anything.
+  if [[ -z "$is_default" ]]
+    then
+    echo ""
+    else
+    echo_green "Setting $org as cci's default org"
+    echo_green "--------------------------------------"
+    echo "cci org default \"$org\""
+    echo ""
+    cci org default "$org"
+    echo ""
+  fi
 }
 
 flow_scratch_org() {
@@ -298,21 +317,23 @@ flow_scratch_org() {
   echo ""
 }
 
-dev_org() {
-  org=$1
-  flow="dev_org"
-  is_not_default=$2
-  flow_org $org $flow $is_not_default
-}
-
 dev_scratch_org() {
   flow="dev_org"
   org_template="dev"
-  scratch_org=$1
+  org=$1
   days=$2
 
-  flow_scratch_org $flow $org_template $scratch_org $days
+  flow_scratch_org $flow $org_template $org $days
 }
+
+dev_org() {
+  org="beta"
+  days=$1
+
+  flow_org $org $flow $is_not_default
+}
+
+
 
 dev_org_namespaced() {
   org="$1_namespaced"
@@ -321,20 +342,19 @@ dev_org_namespaced() {
   flow_org $org $flow $is_not_default
 }
 
-beta_org() {
-  org=$1
-  flow="install_beta"
-  is_not_default="not default"
-  flow_org $org $flow $is_not_default
-}
-
 beta_scratch_org() {
   flow="install_beta"
   org_template="beta"
-  scratch_org=$1
+  org=$1
   days=$2
 
-  flow_scratch_org $flow $org_template $scratch_org $days
+  flow_scratch_org $flow $org_template $org $days
+}
+
+beta_org() {
+  org="beta"
+  days=$1
+  beta_scratch_org $org $days
 }
 
 regression_org() {
