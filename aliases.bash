@@ -158,6 +158,10 @@ alias python=$(which python3)
 alias pip=$(which pip3)
 
 flow_org() {
+  org=$1
+  flow=$2
+  is_not_default=$3
+
   if [[ $# -eq 0 ]]
     then
       echo_red "No arugments found.  Expecting 2 arguments: cci org name, cci flow name[, is_not_default]"
@@ -165,23 +169,19 @@ flow_org() {
       return 1
   fi
 
-  if [[ -z "$1" ]]
+  if [[ -z "$org" ]]
     then
       echo_red "First argument cannot be blank: cci org name"
       echo ""
       return 1
   fi
 
-  if [[ -z "$2" ]]
+  if [[ -z "$flow" ]]
     then
-      echo_red "First argument cannot be blank: cci flow name"
+      echo_red "Second argument cannot be blank: cci flow name"
       echo ""
       return 1
   fi
-
-  org=$1
-  flow=$2
-  is_not_default=$3
 
   echo ""
   
@@ -274,6 +274,12 @@ scratch_org() {
 }
 
 flow_scratch_org() {
+
+  flow=$1
+  org_template=$2
+  scratch_org=$3
+  days=$4
+
   if [[ $# -eq 0 ]]
     then
       echo_red "No arugments found.  Expecting 3 arguments: flow name, cci org template name, cci scratch org name, [days]"
@@ -281,31 +287,26 @@ flow_scratch_org() {
       return 1
   fi
 
-  if [[ -z "$1" ]]
+  if [[ -z "$flow" ]]
     then
       echo_red "First argument cannot be blank: flow name"
       echo ""
       return 1
   fi
   
-  if [[ -z "$2" ]]
+  if [[ -z "$org_template" ]]
     then
-      echo_red "First argument cannot be blank: cci org template name"
+      echo_red "Second argument cannot be blank: cci org template name"
       echo ""
       return 1
   fi
 
-  if [[ -z "$3" ]]
+  if [[ -z "$scratch_org" ]]
     then
-      echo_red "First argument cannot be blank: cci scratch org name"
+      echo_red "Third argument cannot be blank: cci scratch org name"
       echo ""
       return 1
   fi
-
-  flow=$1
-  org_template=$2
-  scratch_org=$3
-  days=$4
 
   scratch_org $org_template $scratch_org $days
 
@@ -327,7 +328,8 @@ dev_scratch_org() {
 }
 
 dev_org() {
-  org="beta"
+  org="dev"
+  flow="dev_org"
   days=$1
 
   flow_org $org $flow $is_not_default
