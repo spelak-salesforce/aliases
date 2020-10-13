@@ -140,9 +140,11 @@ function sfpt() {
     then
       is_force=""
   fi
+  
 
-  echo "sfdx force:source:push $is_force && sfdx force:apex:test:run --codecoverage --resultformat=human --wait=10 --synchronous --classnames=$apex_test"
-  sfdx force:source:push $is_force && sfdx force:apex:test:run --codecoverage --resultformat=human --wait=10 --synchronous --classnames=$apex_test
+  command="sfdx force:source:push $is_force && sfdx force:apex:test:run --codecoverage --resultformat=human --wait=10 --synchronous --classnames=$apex_test"
+  echo $command
+  eval $command
 }
 
 alias sfdo_devhub='sfdx force:config:set defaultdevhubusername=ngo'
