@@ -83,8 +83,12 @@ function get_default_branch {
 }
 
 # git
-alias git_delete_merged_branches='git for-each-ref --format "%(refname:short)" --merged HEAD refs/heads/$1 | grep -v master | xargs git branch -d'
+alias git_delete_merged_branches_to_master='git for-each-ref --format "%(refname:short)" --merged HEAD refs/heads/$1 | grep -v master | xargs git branch -d'
+alias git_delete_merged_branches_to_main='git for-each-ref --format "%(refname:short)" --merged HEAD refs/heads/$1 | grep -v main | xargs git branch -d'
 alias git_delete_merged_feature_branches='git_delete_merged_branches feature'
+
+alias git_cleanup_main='git branch -r --merged | grep -v main | sed "s/origin\///" | xargs -n 1 git push --delete origin'
+alias git_cleanup_master='git branch -r --merged | grep -v master | sed "s/origin\///" | xargs -n 1 git push --delete origin'
 
 alias git_master='git fetch origin && git checkout master && git remote prune origin && git clean -d -f && git pull'
 alias git_masterd='git add . && git stash && git stash drop && git_master'
@@ -124,8 +128,8 @@ alias sfo='sfdx force:org:open '
 alias sfa='sfdx force:apex:execute -f $1'
 
 # Synchronuously test $1; can only synchronuously test a single Apex Class
-alias sfdx_test='sfdx force:apex:test:run --codecoverage --resultformat=human --wait=10 --synchronous -n $1'
-alias sfdx_test_method='sfdx force:apex:test:run --codecoverage --resultformat=human --wait=10 --synchronous -t $1'
+alias sfdx_test='sfdx force:apex:test:run --outputdir ./.sfdx/tools/testresults/apex --loglevel error --codecoverage --resultformat=human --wait=30 --synchronous -n $1'
+alias sfdx_test_method='sfdx force:apex:test:run --outputdir ./.sfdx/tools/testresults/apex --loglevel error --codecoverage --resultformat=human --wait=30 --synchronous -t $1'
 
 # Aynchronuously test $1; $1 is a comma-delimited list of Apex Class Names
 alias sfdx_tests='sfdx force:apex:test:run -c -r human -w 10 -n $1'
@@ -142,7 +146,7 @@ function sfpt() {
   fi
   
 
-  command="sfdx force:source:push $is_force && sfdx force:apex:test:run --codecoverage --resultformat=human --wait=10 --synchronous --classnames=$apex_test"
+  command="sfdx force:source:push $is_force && sfdx force:apex:test:run --outputdir ./.sfdx/tools/testresults/apex --loglevel error --codecoverage --resultformat=human --wait=30 --synchronous --classnames=$apex_test"
   echo $command
   eval $command
 }
@@ -501,6 +505,8 @@ export SFDO="$GITHUB/SalesforceFoundation"
 export SOMA="$HOME/Documents/git.soma.salesforce.com"
 export LOC="$SOMA/platform-localization/loc"
 export SCOTTPELAK="$GITHUB/scottpelak"
+export SFDC="$GITHUB/salesforce"
+export LWC="$GITHUB/salesforce/lightning-components"
 
 # In Summer '20, the apex test reporter will return more relevant and accurate code coverage results for test runs. 
 # To preview this change, set the environment variable SFDX_IMPROVED_CODE_COVERAGE='true'.
