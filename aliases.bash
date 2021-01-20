@@ -124,6 +124,7 @@ alias sfp='sfdx force:source:push '
 alias sfl='sfdx force:source:pull '
 alias sfd='sfdx force:source:deploy '
 alias sfr='sfdx force:source:retrieve '
+alias sfs='sfdx force:source: status '
 alias sfo='sfdx force:org:open '
 alias sfa='sfdx force:apex:execute -f $1'
 
@@ -133,7 +134,7 @@ alias sfdx_test_method='sfdx force:apex:test:run --outputdir ./.sfdx/tools/testr
 
 # Aynchronuously test $1; $1 is a comma-delimited list of Apex Class Names
 alias sfdx_tests='sfdx force:apex:test:run -c -r human -w 10 -n $1'
-alias sfdx_tests_all='sfdx force:apex:test:run -c -l RunLocalTests -r human'
+alias sfdx_tests_all='sfdx force:apex:test:run --codecoverage --testlevel=RunLocalTests --resultformat=human --outputdir ./.sfdx/tools/testresults/apex --loglevel error'
 
 function sfpt() {
   # sfp && sfdx_test combined
