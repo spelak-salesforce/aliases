@@ -92,6 +92,15 @@ function git_main() {
   git pull
 }
 
+function git_master() {
+  echo 'git fetch origin --all --prune && git checkout master && git remote prune origin && git clean -d -f && git pull'
+  git fetch --all --prune
+  git checkout master
+  git remote prune origin
+  git clean -d -f
+  git pull
+}
+
 function gfp() {
   echo 'git fetch --all --prune && git pull'
   git fetch --all --prune
@@ -106,7 +115,6 @@ alias git_delete_merged_feature_branches='git_delete_merged_branches feature'
 alias git_cleanup_main='git branch -r --merged | grep -v main | sed "s/origin\///" | xargs -n 1 git push --delete origin'
 alias git_cleanup_master='git branch -r --merged | grep -v master | sed "s/origin\///" | xargs -n 1 git push --delete origin'
 
-alias git_master='git fetch origin --all --prune && git checkout master && git remote prune origin && git clean -d -f && git pull'
 alias git_masterd='git add . && git stash && git stash drop && git_master'
 
 #alias git_main='git fetch origin --all --prune && git checkout main && git remote prune origin && git clean -d -f && git pull'
