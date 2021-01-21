@@ -90,10 +90,10 @@ alias git_delete_merged_feature_branches='git_delete_merged_branches feature'
 alias git_cleanup_main='git branch -r --merged | grep -v main | sed "s/origin\///" | xargs -n 1 git push --delete origin'
 alias git_cleanup_master='git branch -r --merged | grep -v master | sed "s/origin\///" | xargs -n 1 git push --delete origin'
 
-alias git_master='git fetch origin && git checkout master && git remote prune origin && git clean -d -f && git pull'
+alias git_master='git fetch origin --all --prune && git checkout master && git remote prune origin && git clean -d -f && git pull'
 alias git_masterd='git add . && git stash && git stash drop && git_master'
 
-alias git_main='git fetch origin && git checkout main && git remote prune origin && git clean -d -f && git pull'
+alias git_main='git fetch origin --all --prune && git checkout main && git remote prune origin && git clean -d -f && git pull'
 alias git_maind='git add . && git stash && git stash drop && git_main'
 
 alias git_drop='git add . && git stash && git stash drop'
@@ -101,6 +101,13 @@ alias git_drop='git add . && git stash && git stash drop'
 alias gitm='git_main'
 alias gitd='git_drop'
 alias gitmd='git add . && git stash && git stash drop && gitm'
+
+
+function gfp() {
+  echo 'git fetch --all --prune && git pull'
+  git fetch --all --prune && git pull
+}
+
 
 alias git_branch='git_master && git checkout $1'
 
