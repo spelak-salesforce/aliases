@@ -366,13 +366,29 @@ dev_org() {
   flow_org $org $flow $is_not_default
 }
 
-
-
 dev_org_namespaced() {
   org="$1_namespaced"
   flow="dev_org_namespaced"
   is_not_default=$2
   flow_org $org $flow $is_not_default
+}
+
+2gp_org() {
+  flow="2gp_org"
+  org="2gp"
+  days=$1
+  is_not_default=true
+
+  flow_org $org $flow $is_not_default
+}
+
+2gp_scratch_org() {
+  flow="2gp_org"
+  org_template="2gp"
+  org=$1
+  days=$2
+
+  flow_scratch_org $flow $org_template $org $days
 }
 
 beta_scratch_org() {
