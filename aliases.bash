@@ -83,26 +83,74 @@ function get_default_branch {
 }
 
 # git
-function git_main() {
-  echo 'git fetch origin --all --prune && git checkout main && git remote prune origin && git clean -d -f && git pull'
+function git_default_branch() {
+  if [[ -z "$1" ]]
+    then
+      echo_red "Expecting 1 argument: default branch name"
+      echo ""
+      return 1
+  fi
+  default_branch=$1
+  
+  echo_blue 'git fetch origin --all --prune &&' 
+  echo_blue "    git checkout $GREEN_COLOR$default_branch$END_COLOR$BLUE_COLOR &&"
+  echo_blue '    git remote prune origin && git clean -d -f &&'
+  echo_blue '    git pull'
+  echo_blue '---------------'
+  
   git fetch --all --prune
-  git checkout main
+  git checkout $default_branch
   git remote prune origin
   git clean -d -f
   git pull
+}
+
+function git_branch() {
+  if [[ -z "$1" ]]
+    then
+      echo_red "Expecting 2 arguments: default branch name, branch name"
+      echo ""
+      return 1
+  fi
+  if [[ -z "$2" ]]
+    then
+      echo_red "Expecting 2 arguments: default branch name, branch name"
+      echo ""
+      return 1
+  fi
+  default_branch=$1
+  branch=$2
+
+  echo_blue 'git fetch origin --all --prune &&'
+  echo_blue "    git checkout $GREEN_COLOR$default_branch$END_COLOR$BLUE_COLOR &&"
+  echo_blue '    git remote prune origin && git clean -d -f &&'
+  echo_blue '    git pull &&'
+  echo_blue "    git checkout $GREEN_COLOR$branch$END_COLOR$BLUE_COLOR &&"
+  echo_blue '    git pull'
+  echo_blue '---------------'
+
+  git fetch --all --prune
+  git checkout $default_branch
+  git remote prune origin
+  git clean -d -f
+  git pull
+  git checkout $branch
+  git pull
+}
+
+function git_main() {
+  git_default_branch main
 }
 
 function git_master() {
-  echo 'git fetch origin --all --prune && git checkout master && git remote prune origin && git clean -d -f && git pull'
-  git fetch --all --prune
-  git checkout master
-  git remote prune origin
-  git clean -d -f
-  git pull
+  git_default_branch master
 }
 
 function gfp() {
-  echo 'git fetch --all --prune && git pull'
+  echo_blue 'git fetch origin --all --prune &&'
+  echo_blue '    git pull'
+  echo_blue '---------------'
+
   git fetch --all --prune
   git pull
 }
@@ -116,17 +164,17 @@ alias git_cleanup_main='git branch -r --merged | grep -v main | sed "s/origin\//
 alias git_cleanup_master='git branch -r --merged | grep -v master | sed "s/origin\///" | xargs -n 1 git push --delete origin'
 
 alias git_masterd='git add . && git stash && git stash drop && git_master'
-
-#alias git_main='git fetch origin --all --prune && git checkout main && git remote prune origin && git clean -d -f && git pull'
 alias git_maind='git add . && git stash && git stash drop && git_main'
+
+alias git_master_branch='git_branch master '
+alias git_main_branch='git_branch main '
 
 alias git_drop='git add . && git stash && git stash drop'
 
 alias gitm='git_main'
+alias gitmb='git_main_branch '
 alias gitd='git_drop'
 alias gitmd='git add . && git stash && git stash drop && gitm'
-
-alias git_branch='git_master && git checkout $1'
 
 # cci shortcuts
 alias cci_test='cci task run run_tests --org dev -o test_name_match '
