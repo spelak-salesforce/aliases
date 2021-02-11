@@ -218,10 +218,26 @@ function sfpt() {
       is_force=""
   fi
   
+  echo_green "sfdx pushing and running test for $apex_test"
+  echo_green "---------------------------------------------------------"
 
-  command="sfdx force:source:push $is_force && sfdx force:apex:test:run --outputdir ./.sfdx/tools/testresults/apex --loglevel error --codecoverage --resultformat=human --wait=30 --synchronous --classnames=$apex_test"
-  echo $command
-  eval $command
+  echo_blue "sfdx force:source:push $GREEN_COLOR$is_force$END_COLOR$BLUE_COLOR"
+  sfdx force:source:push $is_force
+
+  if [ $? -ne 0 ]; then
+    return 1
+  fi
+
+  echo_blue ""
+  echo_blue 'sfdx force:apex:test:run'
+  echo_blue "    --classnames=$GREEN_COLOR$apex_test$END_COLOR$BLUE_COLOR"
+  echo_blue "    --outputdir ./.sfdx/tools/testresults/apex"
+  echo_blue '    --loglevel=error'
+  echo_blue '    --codecoverage'
+  echo_blue "    --resultformat=human"
+  echo_blue '    --wait=30'
+  echo_blue '    --synchronous'
+  sfdx force:apex:test:run --outputdir ./.sfdx/tools/testresults/apex --loglevel=error --codecoverage --resultformat=human --wait=30 --synchronous "--classnames=$apex_test"
 }
 
 alias sfdo_devhub='sfdx force:config:set defaultdevhubusername=ngo'
