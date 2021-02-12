@@ -173,6 +173,7 @@ alias git_drop='git add . && git stash && git stash drop'
 
 alias gitm='git_main'
 alias gitmb='git_main_branch '
+alias gmb='git_main_branch '
 alias gitd='git_drop'
 alias gitmd='git add . && git stash && git stash drop && gitm'
 
