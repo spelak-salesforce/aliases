@@ -1,4 +1,3 @@
-
 # echo with colors
 BLACK_COLOR='\033[0;30m'
 RED_COLOR='\033[0;31m'
@@ -29,75 +28,74 @@ END_COLOR='\033[0m' # No Color
 # Light Gray   0;37     White         1;37
 # END_COLOR    \033[0m
 
-function echo_black {
+function echo_black() {
   echo "${BLACK_COLOR}$1${END_COLOR}"
 }
-function echo_red {
+function echo_red() {
   echo "${RED_COLOR}$1${END_COLOR}"
 }
-function echo_green {
+function echo_green() {
   echo "${GREEN_COLOR}$1${END_COLOR}"
 }
-function echo_organge {
+function echo_organge() {
   echo "${ORGANGE_COLOR}$1${END_COLOR}"
 }
-function echo_blue {
+function echo_blue() {
   echo "${BLUE_COLOR}$1${END_COLOR}"
 }
-function echo_purple {
+function echo_purple() {
   echo "${PURPLE_COLOR}$1${END_COLOR}"
 }
-function echo_cyan {
+function echo_cyan() {
   echo "${CYAN_COLOR}$1${END_COLOR}"
 }
-function echo_light_grey {
+function echo_light_grey() {
   echo "${LIGHT_GREY_COLOR}$1${END_COLOR}"
 }
-function echo_dark_grey {
+function echo_dark_grey() {
   echo "${DARK_GREY_COLOR}$1${END_COLOR}"
 }
-function echo_light_red {
+function echo_light_red() {
   echo "${LIGHT_RED_COLOR}$1${END_COLOR}"
 }
-function echo_light_green {
+function echo_light_green() {
   echo "${LIGHT_GREEN_COLOR}$1${END_COLOR}"
 }
-function echo_yellow {
+function echo_yellow() {
   echo "${YELLOW_COLOR}$1${END_COLOR}"
 }
-function echo_light_blue {
+function echo_light_blue() {
   echo "${LIGHT_BLUE_COLOR}$1${END_COLOR}"
 }
-function echo_light_purpple {
+function echo_light_purpple() {
   echo "${LIGHT_PURPPLE_COLOR}$1${END_COLOR}"
 }
-function echo_light_cyan {
+function echo_light_cyan() {
   echo "${LIGHT_CYAN_COLOR}$1${END_COLOR}"
 }
-function echo_white {
+function echo_white() {
   echo "${WHITE_COLOR}$1${END_COLOR}"
 }
 
-function get_default_branch {
-  
+function get_default_branch() {
+
 }
 
 # git
 function git_default_branch() {
-  if [[ -z "$1" ]]
-    then
-      echo_red "Expecting 1 argument: default branch name"
-      echo ""
-      return 1
+  if [[ -z "$1" ]]; then
+    echo_red "Expecting 1 argument: default branch name"
+    echo ""
+    return 1
   fi
   default_branch=$1
-  
-  echo_blue 'git fetch origin --all --prune &&' 
+
+  echo_blue 'git fetch origin --all --prune &&'
   echo_blue "    git checkout $GREEN_COLOR$default_branch$END_COLOR$BLUE_COLOR &&"
   echo_blue '    git remote prune origin && git clean -d -f &&'
   echo_blue '    git pull'
   echo_blue '---------------'
-  
+
   git fetch --all --prune
   git checkout $default_branch
   git remote prune origin
@@ -106,17 +104,15 @@ function git_default_branch() {
 }
 
 function git_branch() {
-  if [[ -z "$1" ]]
-    then
-      echo_red "Expecting 2 arguments: default branch name, branch name"
-      echo ""
-      return 1
+  if [[ -z "$1" ]]; then
+    echo_red "Expecting 2 arguments: default branch name, branch name"
+    echo ""
+    return 1
   fi
-  if [[ -z "$2" ]]
-    then
-      echo_red "Expecting 2 arguments: default branch name, branch name"
-      echo ""
-      return 1
+  if [[ -z "$2" ]]; then
+    echo_red "Expecting 2 arguments: default branch name, branch name"
+    echo ""
+    return 1
   fi
   default_branch=$1
   branch=$2
@@ -154,7 +150,6 @@ function gfp() {
   git fetch --all --prune
   git pull
 }
-
 
 alias git_delete_merged_branches_to_master='git for-each-ref --format "%(refname:short)" --merged HEAD refs/heads/$1 | grep -v master | xargs git branch -d'
 alias git_delete_merged_branches_to_main='git for-each-ref --format "%(refname:short)" --merged HEAD refs/heads/$1 | grep -v main | xargs git branch -d'
@@ -214,11 +209,10 @@ function sfpt() {
   apex_test=$1
   is_force="-f"
 
-  if [[ -z "$2" ]]
-    then
-      is_force=""
+  if [[ -z "$2" ]]; then
+    is_force=""
   fi
-  
+
   echo_green "sfdx pushing and running test for $apex_test"
   echo_green "---------------------------------------------------------"
 
@@ -258,29 +252,26 @@ flow_org() {
   flow=$2
   is_not_default=$3
 
-  if [[ $# -eq 0 ]]
-    then
-      echo_red "No arugments found.  Expecting 2 arguments: cci org name, cci flow name[, is_not_default]"
-      echo ""
-      return 1
+  if [[ $# -eq 0 ]]; then
+    echo_red "No arugments found.  Expecting 2 arguments: cci org name, cci flow name[, is_not_default]"
+    echo ""
+    return 1
   fi
 
-  if [[ -z "$org" ]]
-    then
-      echo_red "First argument cannot be blank: cci org name"
-      echo ""
-      return 1
+  if [[ -z "$org" ]]; then
+    echo_red "First argument cannot be blank: cci org name"
+    echo ""
+    return 1
   fi
 
-  if [[ -z "$flow" ]]
-    then
-      echo_red "Second argument cannot be blank: cci flow name"
-      echo ""
-      return 1
+  if [[ -z "$flow" ]]; then
+    echo_red "Second argument cannot be blank: cci flow name"
+    echo ""
+    return 1
   fi
 
   echo ""
-  
+
   echo_green "Removing cci org: $org"
   echo_green "--------------------------------------"
   echo "cci org remove \"$org\""
@@ -289,8 +280,7 @@ flow_org() {
   echo ""
 
   # Skip setting the org as the default org if the third argument is anything.
-  if [[ -z "$is_not_default" ]]
-    then
+  if [[ -z "$is_not_default" ]]; then
     echo_green "Setting $org as cci's default org"
     echo_green "--------------------------------------"
     echo "cci org default \"$org\""
@@ -314,28 +304,23 @@ scratch_org() {
   days=$3
   is_not_default=$4
 
-  if [[ $# -eq 0 ]]
-    then
-      echo_red "No arugments found.  Expecting 2 arguments: cci org template name, cci scratch org name, [days, is_default]"
-      echo ""
-      return 1
+  if [[ $# -eq 0 ]]; then
+    echo_red "No arugments found.  Expecting 2 arguments: cci org template name, cci scratch org name, [days, is_default]"
+    echo ""
+    return 1
   fi
 
-  if [[ -z "$org_template" ]]
-    then
-      echo_red "First argument cannot be blank: cci org template name"
-      echo ""
-      return 1
+  if [[ -z "$org_template" ]]; then
+    echo_red "First argument cannot be blank: cci org template name"
+    echo ""
+    return 1
   fi
 
-  if [[ -z "$org" ]]
-    then
-      echo_red "First argument cannot be blank: cci scratch org name"
-      echo ""
-      return 1
+  if [[ -z "$org" ]]; then
+    echo_red "First argument cannot be blank: cci scratch org name"
+    echo ""
+    return 1
   fi
-
-  
 
   echo_green "Removing cci scratch org $org"
   echo_green "--------------------------------------"
@@ -344,9 +329,8 @@ scratch_org() {
   cci org remove $org
   echo ""
 
-  if [[ -z "$days" ]]
-    then
-      days=1
+  if [[ -z "$days" ]]; then
+    days=1
   fi
 
   echo_green "Creating cci scratch org $org from $org_template for $days days"
@@ -356,10 +340,9 @@ scratch_org() {
   cci org scratch $org_template $org --days $days
 
   # Skip setting the org as the default org if the third argument is anything.
-  if [[ -z "$is_default" ]]
-    then
+  if [[ -z "$is_default" ]]; then
     echo ""
-    else
+  else
     echo_green "Setting $org as cci's default org"
     echo_green "--------------------------------------"
     echo "cci org default \"$org\""
@@ -376,32 +359,28 @@ flow_scratch_org() {
   scratch_org=$3
   days=$4
 
-  if [[ $# -eq 0 ]]
-    then
-      echo_red "No arugments found.  Expecting 3 arguments: flow name, cci org template name, cci scratch org name, [days]"
-      echo ""
-      return 1
+  if [[ $# -eq 0 ]]; then
+    echo_red "No arugments found.  Expecting 3 arguments: flow name, cci org template name, cci scratch org name, [days]"
+    echo ""
+    return 1
   fi
 
-  if [[ -z "$flow" ]]
-    then
-      echo_red "First argument cannot be blank: flow name"
-      echo ""
-      return 1
-  fi
-  
-  if [[ -z "$org_template" ]]
-    then
-      echo_red "Second argument cannot be blank: cci org template name"
-      echo ""
-      return 1
+  if [[ -z "$flow" ]]; then
+    echo_red "First argument cannot be blank: flow name"
+    echo ""
+    return 1
   fi
 
-  if [[ -z "$scratch_org" ]]
-    then
-      echo_red "Third argument cannot be blank: cci scratch org name"
-      echo ""
-      return 1
+  if [[ -z "$org_template" ]]; then
+    echo_red "Second argument cannot be blank: cci org template name"
+    echo ""
+    return 1
+  fi
+
+  if [[ -z "$scratch_org" ]]; then
+    echo_red "Third argument cannot be blank: cci scratch org name"
+    echo ""
+    return 1
   fi
 
   scratch_org $org_template $scratch_org $days
@@ -423,9 +402,26 @@ dev_scratch_org() {
   flow_scratch_org $flow $org_template $org $days
 }
 
+dev_scratch_org_2gp() {
+  flow="dev_org_2gp"
+  org_template="dev_2gp"
+  org=$1
+  days=$2
+
+  flow_scratch_org $flow $org_template $org $days
+}
+
 dev_org() {
   org="dev"
   flow="dev_org"
+  days=$1
+
+  flow_org $org $flow $is_not_default
+}
+
+dev_org_2gp() {
+  org="dev_2gp"
+  flow="dev_org_2gp"
   days=$1
 
   flow_org $org $flow $is_not_default
@@ -517,7 +513,7 @@ alias update_cci='brew update && brew upgrade && npm update --global sfdx-cli &&
 alias cci_rollback='git checkout -- . && rm -rf force-app-bak'
 
 # Python
-function blake {  
+function blake() {
   echo "black"
   echo "----------------------"
   black $1
@@ -529,7 +525,7 @@ function blake {
   echo ""
 }
 
-function bytest {
+function bytest() {
   blake $1
   echo "pytest"
   echo "----------------------"
@@ -537,9 +533,8 @@ function bytest {
   echo ""
 }
 
-function force_push_and_test {
-  if [ -z "$1" ]
-  then
+function force_push_and_test() {
+  if [ -z "$1" ]; then
     echo "Syntax: force_push_and_test {Apex Test Class Name}"
     echo "Apex Test Class Name cannot be blank"
     return
@@ -547,16 +542,14 @@ function force_push_and_test {
 
   force push "src/classes/$1.cls"
   # exit/return if force push fails
-  if [[ $? != 0 ]]
-  then
+  if [[ $? != 0 ]]; then
     return
   fi
   cci task run run_tests --org dev -o test_name_match "$1"
 }
 
-function force_push_and_test {
-  if [ -z "$1" ]
-  then
+function force_push_and_test() {
+  if [ -z "$1" ]; then
     echo "Syntax: push_and_test {Apex Test Class Name}"
     echo "Apex Test Class Name cannot be blank"
     return
@@ -564,36 +557,33 @@ function force_push_and_test {
 
   sfdx force:source:push -f
   # exit/return if force push fails
-  if [[ $? != 0 ]]
-  then
+  if [[ $? != 0 ]]; then
     return
   fi
-  
+
   cci task run run_tests --org dev -o test_name_match "$1"
 }
 
-function source_pull_convert {
-  if [ -z "$1" ]
-  then
+function source_pull_convert() {
+  if [ -z "$1" ]; then
     sfdx force:source:pull -f
   else
     sfdx force:source:pull -f -u "$1"
   fi
 
   # exit/return if force push fails
-  if [[ $? != 0 ]]
-  then
+  if [[ $? != 0 ]]; then
     return
   fi
   sfdx force:source:convert -r force-app/ -d src/
 }
 
-function yaml {
+function yaml() {
   python -c "import yaml;print(yaml.safe_load(open('$1'))$2)"
 }
 
-function dev_sfdx {
-  PROJECT_NAME=$(yaml cumulusci.yml  "['project']['name']")
+function dev_sfdx() {
+  PROJECT_NAME=$(yaml cumulusci.yml "['project']['name']")
   PROJECT_NAME+='__dev'
   sfdx force:config:set defaultusername=$PROJECT_NAME
 }
@@ -614,12 +604,10 @@ export SCOTTPELAK="$GITHUB/scottpelak"
 export SFDC="$GITHUB/salesforce"
 export LWC="$GITHUB/salesforce/lightning-components"
 
-# In Summer '20, the apex test reporter will return more relevant and accurate code coverage results for test runs. 
+# In Summer '20, the apex test reporter will return more relevant and accurate code coverage results for test runs.
 # To preview this change, set the environment variable SFDX_IMPROVED_CODE_COVERAGE='true'.
 # Learn more at # https://releasenotes.docs.salesforce.com/en-us/spring20/release-notes/rn_sf_cli_code_coverage_apextests.htm
 export SFDX_IMPROVED_CODE_COVERAGE='true'
-
-
 
 export GPG_TTY=$(tty)
 
@@ -637,6 +625,6 @@ PATH=~PATH:$SOMA/spelak/l10n
 
 jdk() {
   version=$1
-  export JAVA_HOME=$(/usr/libexec/java_home -v"$version");
+  export JAVA_HOME=$(/usr/libexec/java_home -v"$version")
   java -version
 }
