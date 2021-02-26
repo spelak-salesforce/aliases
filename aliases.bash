@@ -404,7 +404,7 @@ dev_scratch_org() {
 
 dev_scratch_org_2gp() {
   flow="dev_org_2gp"
-  org_template="dev_2gp"
+  org_template="dev"
   org=$1
   days=$2
 
@@ -420,11 +420,12 @@ dev_org() {
 }
 
 dev_org_2gp() {
-  org="dev_2gp"
   flow="dev_org_2gp"
-  days=$1
+  org_template="dev"
+  org="dev_2gp"
+  days=$2
 
-  flow_org $org $flow $is_not_default
+  flow_scratch_org $flow $org_template $org $days
 }
 
 dev_org_namespaced() {
