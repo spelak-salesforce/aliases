@@ -437,17 +437,8 @@ dev_org_namespaced() {
 
 2gp_org() {
   flow="2gp_org"
-  org="2gp"
-  days=$1
-  is_not_default=true
-
-  flow_org $org $flow $is_not_default
-}
-
-2gp_scratch_org() {
-  flow="2gp_org"
-  org_template="2gp"
-  org=$1
+  org_template="dev"
+  org="dev_2gp"
   days=$2
 
   flow_scratch_org $flow $org_template $org $days
